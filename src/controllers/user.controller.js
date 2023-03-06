@@ -3,7 +3,7 @@ const { userService } = require('../services');
 const insert = async (req, res) => {
     try {
         const user = req.body;
-        const newUser = await userService.create(user);
+        const newUser = await userService.insert(user);
         if (newUser) {
           return res.status(201).json({ token: newUser });
         }

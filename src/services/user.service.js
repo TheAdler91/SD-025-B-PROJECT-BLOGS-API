@@ -2,6 +2,15 @@ const { User } = require('../models');
 const { genarateToken } = require('../utils/token');
 const { ocult: ocultPaswword } = require('../utils');
 
+const findById = async (id) => {
+  const user = await User.findByPk(id);
+  if (user) {
+    const [result] = ocultPaswword([user]);
+    return result;
+  }
+  return user;
+};
+
 const findByEmail = async (email) => {
     const result = await User.findOne({
       where: { email },
@@ -27,4 +36,5 @@ const insert = async (user) => {
   module.exports = {
     insert,
     getAll,
+    findById,
   };

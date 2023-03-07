@@ -5,6 +5,8 @@ const { categoryValidation } = require('../middlewares');
 
 const router = express.Router();
 
+router.get('/', token.tokenValidation, categoryController.findAll);
+
 router.post('/', token.tokenValidation, categoryValidation.validateFieldName,
 categoryController.insert);
 

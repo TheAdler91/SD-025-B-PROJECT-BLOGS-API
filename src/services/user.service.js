@@ -1,5 +1,6 @@
 const { User } = require('../models');
 const { genarateToken } = require('../utils/token');
+const { ocult: ocultPaswword } = require('../utils');
 
 const findByEmail = async (email) => {
     const result = await User.findOne({
@@ -7,6 +8,11 @@ const findByEmail = async (email) => {
     });
     return result;
   };
+
+const getAll = async () => {
+    const result = await User.findAll();
+      return ocultPaswword(result);
+};  
 
 const insert = async (user) => {
     const exists = await findByEmail(user.email);
@@ -20,4 +26,5 @@ const insert = async (user) => {
 
   module.exports = {
     insert,
+    getAll,
   };
